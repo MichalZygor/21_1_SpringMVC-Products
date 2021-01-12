@@ -1,10 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dodawanie produktu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        .text-color-mz1 {
+            color: darkgreen;
+        }
 
+        .bg-color-mz1 {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container-fluid bg-white shadow-sm mt-5 mb-2 text-color-mz1 fs-4 text-center fw-bolder pt-3 pb-3">
+    <img th:src="@{src/logo.gif}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 100px"/>
+    Magazyn z "Produktami"
+</div>
+
+<div class="container">
+    <div class="d-grid d-md-flex justify-content-md-end">
+        <a th:href="@{|/|}" class="btn btn-warning m-1" href="/" role="button">Strona główna</a>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md" id="main">
+            <p class="h6 fw-bolder mb-3">Dodaj nową pozycję:</p>
+            <form th:object="${product}" class="needs-validation" novalidate method="post" action="/add">
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="validationCustom01">Nazwa produktu: </label>
+                        <input type="text" class="form-control" id="validationCustom01" placeholder="" required
+                               minlength="3" th:field="*{name}">
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="validationCustom02">Cena, PLN netto: </label>
+                        <input type="number" class="form-control" id="validationCustom02" placeholder="" required
+                               min="0" th:field="*{price}">
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="validationCustom03">Wybierz kategorię: </label>
+                        <select class="form-control" id="validationCustom03" required>
+                            <option disabled="disabled" value="" selected>---</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+
+                        <div class="invalid-feedback">
+                            Proszę wybrać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+
+
+                <button class="btn btn-secondary" type="reset">Wyczyść formularz!</button>
+                <button class="btn btn-primary" type="submit">Dodaj!</button>
+
+            </form>
+
+            <hr class="mt-5"/>
+            <p class="h6 fw-bolder mb-3">Lista produktów:</p>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Zdjęcie</th>
+                    <th scope="col">Produkt</th>
+                    <th scope="col">Cena</th>
+                    <th scope="col">Kategoria</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>kat1</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>kat21</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry the Bird</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>kat2d</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-color-mz1 text-secondary shadow-sm mt-5 mb-2 fs-6 text-center pt-3 pb-3">
+    Copyright 2020 by Michał Zygor :)
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 </body>
 </html>
