@@ -31,19 +31,19 @@
         <div class="col-md" id="main">
             <p class="h6 fw-bolder mb-3">Wybierz odpowiednią  kategorię:</p>
             <div class="btn-toolbar" role="toolbar">
-                <a th:each="category: ${categoriesList}" th:text="|${category}|" th:href="@{|/list?category=${category}|}" class="btn btn-warning p-5 m-1" href="/lista?kategoria=wszystko" role="button">Wszystkie kategorie</a>
-                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/lista?kategoria=spozywcze" role="button" >Artykuły
+                <a th:each="category: ${categories}" th:text="|${category.name}|" th:href="@{|/list?category=${category.name}|}" class="btn btn-warning p-5 m-1" href="/lista?kategoria=wszystko" role="button">Wszystkie kategorie</a>
+                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/list?kategoria=spozywcze" role="button" >Artykuły
                     spożywcze</a>
-                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/lista?kategoria=domowe" role="button">Artykuły gospodarstwa
+                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/list?kategoria=domowe" role="button">Artykuły gospodarstwa
                     domowego</a>
-                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/lista?kategoria=inne" role="button">Inne</a>
+                <a th:remove="all" class="btn btn-warning p-5 m-1" href="/list?kategoria=inne" role="button">Inne</a>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid bg-color-mz1 text-secondary shadow-sm mt-5 mb-2 fs-6 text-center pt-3 pb-3">
-Copyright 2020 by Michał Zygor :)
+    Designed by Michał Zygor, 2021.01
 </div>
 </body>
 </html>

@@ -30,7 +30,7 @@
     <div class="row pt-3">
         <div class="col-md" id="main">
             <p class="h6 fw-bolder mb-3">Dodaj nową pozycję:</p>
-            <form th:object="${product}" class="needs-validation" novalidate method="post" action="/add">
+            <form th:object="${newProduct}" th:action="@{/add}" class="needs-validation" novalidate method="post" >
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
                         <label for="validationCustom01">Nazwa produktu: </label>
@@ -56,13 +56,13 @@
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
                         <label for="validationCustom03">Wybierz kategorię: </label>
-                        <select class="form-control" id="validationCustom03" required>
-                            <option disabled="disabled" value="" selected>---</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select th:name="category" class="form-control" id="validationCustom03" required>
+                            <option th:selected="true" disabled="disabled" value="" >---</option>
+                            <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.name}">1</option>
+                            <option th:remove="all" >2</option>
+                            <option th:remove="all" >3</option>
+                            <option th:remove="all" >4</option>
+                            <option th:remove="all" >5</option>
                         </select>
 
                         <div class="invalid-feedback">
@@ -71,7 +71,17 @@
                     </div>
                     <div class="col-md-7 mb-3"></div>
                 </div>
-
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="validationCustom08">Adres obrazka: </label>
+                        <input type="text" class="form-control" id="validationCustom08" placeholder="http://adres.to/img.png" required
+                               minlength="5" th:field="*{imageUrl}">
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
 
                 <button class="btn btn-secondary" type="reset">Wyczyść formularz!</button>
                 <button class="btn btn-primary" type="submit">Dodaj!</button>
@@ -91,21 +101,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>kat1</td>
+                <tr th:each="product: ${products}">
+                    <th th:text="${product.id}" scope="row">1</th>
+                    <td>
+                        <img th:src="@{${product.imageUrl}}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 50px"/>
+                    </td>
+                    <td th:text="${product.name}" >Otto</td>
+                    <td th:text="${product.price}" >@mdo</td>
+                    <td th:text="${product.category}" >kat1</td>
                 </tr>
-                <tr>
+                <tr th:remove="all">
                     <th scope="row">2</th>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
                     <td>kat21</td>
                 </tr>
-                <tr>
+                <tr th:remove="all">
                     <th scope="row">3</th>
                     <td>Larry the Bird</td>
                     <td>Thornton</td>
@@ -119,17 +131,14 @@
 </div>
 
 <div class="container-fluid bg-color-mz1 text-secondary shadow-sm mt-5 mb-2 fs-6 text-center pt-3 pb-3">
-    Copyright 2020 by Michał Zygor :)
+    Designed by Michał Zygor, 2021.01
 </div>
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict';
         window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {

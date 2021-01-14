@@ -32,15 +32,15 @@
         <div class="col-md-3">
             <p class="h6 fw-bolder mb-3">Wybierz kategorię:</p>
             <div class="btn-group-vertical" role="toolbar" >
-                <a class="btn btn-warning m-1 btn-block" href="/lista?kategoria=wszystko" role="button">Wszystkie
+                <a th:each="category: ${categories}" th:text="|${category.name}|" th:href="@{|/list?category=${category.name}|}" class="btn btn-warning m-1 btn-block" href="/list?kategoria=wszystko" role="button">Wszystkie
                     kategorie</a>
-                <a class="btn btn-warning m-1 btn-block" href="/lista?kategoria=spozywcze" role="button">Artykuły spożywcze</a>
-                <a class="btn btn-warning m-1 btn-block" href="/lista?kategoria=domowe" role="button">Artykuły gospodarstwa domowego</a>
-                <a class="btn btn-warning m-1 btn-block" href="/lista?kategoria=inne" role="button">Inne</a>
+                <a th:remove="all" class="btn btn-warning m-1 btn-block" href="/list?kategoria=spozywcze" role="button">Artykuły spożywcze</a>
+                <a th:remove="all" class="btn btn-warning m-1 btn-block" href="/list?kategoria=domowe" role="button">Artykuły gospodarstwa domowego</a>
+                <a th:remove="all" class="btn btn-warning m-1 btn-block" href="/list?kategoria=inne" role="button">Inne</a>
             </div>
         </div>
         <div class="col-md" id="main">
-            <p class="h6 fw-bolder mb-3">Lista produktów w  <span class="text-primary">"Wszystkie kategorie"</span>:</p>
+            <p class="h6 fw-bolder mb-3">Lista produktów w  <span th:text="${selectedCategory}" class="text-primary">"Wszystkie kategorie"</span>:</p>
            <table class="table table-hover">
                 <thead>
                 <tr>
@@ -74,7 +74,7 @@
                 <tfoot>
                 <tr>
                     <td colspan="3">Suma:</td>
-                    <td>$180</td>
+                    <td th:text="${productsTotalSum}">$180</td>
                 </tr>
                 </tfoot>
             </table>
@@ -83,7 +83,7 @@
 </div>
 
 <div class="container-fluid bg-color-mz1 text-secondary shadow-sm mt-5 mb-2 fs-6 text-center pt-3 pb-3">
-    Copyright 2021 by Michał Zygor :)
+    Designed by Michał Zygor, 2021.01
 </div>
 </body>
 </html>
