@@ -1,7 +1,7 @@
 package com.example.demo;
 
 public class Products {
-    private Integer id;
+    private int id;
     private String name;
     private Double price;
     private String imageUrl;
@@ -10,7 +10,7 @@ public class Products {
     public Products() {
     }
 
-    public Products(Integer id, String name, Double price, String imageUrl, String category) {
+    public Products(int id, String name, Double price, String imageUrl, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -22,7 +22,7 @@ public class Products {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

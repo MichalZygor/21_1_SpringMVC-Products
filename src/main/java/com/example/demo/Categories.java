@@ -1,4 +1,17 @@
 package com.example.demo;
+enum CategoryGeneral{
+    ALL_PRODUCTS("Wszystkie produkty");
+
+    private final String description;
+
+    CategoryGeneral(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
 
 public class Categories {
     private Integer id;

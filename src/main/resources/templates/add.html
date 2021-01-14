@@ -45,8 +45,8 @@
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
                         <label for="validationCustom02">Cena, PLN netto: </label>
-                        <input type="number" class="form-control" id="validationCustom02" placeholder="" required
-                               min="0" th:field="*{price}">
+                        <input th:field="*{price}" type="number" class="form-control" id="validationCustom02" placeholder="" required
+                               min="0" step=".01">
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
-                        <label for="validationCustom08">Adres obrazka: </label>
+                        <label for="validationCustom08">Adres obrazka lub wpisz <b>src/none.gif</b>: </label>
                         <input type="text" class="form-control" id="validationCustom08" placeholder="http://adres.to/img.png" required
                                minlength="5" th:field="*{imageUrl}">
                         <div class="invalid-feedback">
@@ -93,7 +93,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">id</th>
                     <th scope="col">Zdjęcie</th>
                     <th scope="col">Produkt</th>
                     <th scope="col">Cena</th>
@@ -108,7 +108,7 @@
                     </td>
                     <td th:text="${product.name}" >Otto</td>
                     <td th:text="${product.price}" >@mdo</td>
-                    <td th:text="${product.category}" >kat1</td>
+                    <td th:text="${product.category}" >kat1 </td>
                 </tr>
                 <tr th:remove="all">
                     <th scope="row">2</th>
