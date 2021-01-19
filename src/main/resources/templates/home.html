@@ -31,7 +31,7 @@
         <div class="col-md" id="main">
             <p class="h6 fw-bolder mb-3">Wybierz odpowiednią  kategorię:</p>
             <div class="btn-toolbar" role="toolbar">
-                <a th:each="category: ${categories}" th:text="|${category.name}|" th:href="@{|/list?category=${category.name}|}" class="btn btn-warning p-5 m-1" href="/lista?kategoria=wszystko" role="button">Wszystkie kategorie</a>
+                <a th:each="productCategory: ${categories}" th:text="|${productCategory.getDescription()}|" th:href="@{|/list?productCategory=${productCategory}|}" class="btn btn-warning p-5 m-1" href="/list?kategoria=wszystko" role="button">Wszystkie kategorie</a>
                 <a th:remove="all" class="btn btn-warning p-5 m-1" href="/list?kategoria=spozywcze" role="button" >Artykuły
                     spożywcze</a>
                 <a th:remove="all" class="btn btn-warning p-5 m-1" href="/list?kategoria=domowe" role="button">Artykuły gospodarstwa

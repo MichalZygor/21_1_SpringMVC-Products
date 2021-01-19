@@ -1,29 +1,19 @@
 package com.example.demo;
 
-public class Products {
-    private int id;
+public class Product {
     private String name;
     private Double price;
     private String imageUrl;
-    private String category;
+    private ProductCategory category;
 
-    public Products() {
+    public Product() {
     }
 
-    public Products(int id, String name, Double price, String imageUrl, String category) {
-        this.id = id;
+    public Product(String name, Double price, String imageUrl, ProductCategory category) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -50,11 +40,11 @@ public class Products {
         this.imageUrl = imageUrl;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategory(ProductCategory productCategory) {
+        this.category = productCategory;
     }
 }
