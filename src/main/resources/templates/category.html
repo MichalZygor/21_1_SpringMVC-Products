@@ -32,7 +32,7 @@
         <div class="col-md-3">
             <p class="h6 fw-bolder mb-3">Wybierz kategorię:</p>
             <div class="btn-group-vertical" role="toolbar" >
-                <a th:each="category: ${categories}" th:text="|${category.name}|" th:href="@{|/list?category=${category.name}|}" class="btn btn-warning m-1 btn-block" href="/list?kategoria=wszystko" role="button">Wszystkie
+                <a th:each="productCategory: ${categories}" th:text="|${productCategory.getDescription()}|" th:href="@{|/list?productCategory=${productCategory}|}" class="btn btn-warning m-1 btn-block" href="/list?kategoria=wszystko" role="button">Wszystkie
                     kategorie</a>
                 <a th:remove="all" class="btn btn-warning m-1 btn-block" href="/list?kategoria=spozywcze" role="button">Artykuły spożywcze</a>
                 <a th:remove="all" class="btn btn-warning m-1 btn-block" href="/list?kategoria=domowe" role="button">Artykuły gospodarstwa domowego</a>
@@ -40,11 +40,11 @@
             </div>
         </div>
         <div class="col-md" id="main">
-            <p class="h6 fw-bolder mb-3">Lista produktów w  <span th:text="${selectedCategory}" class="text-primary">"Wszystkie kategorie"</span>:</p>
+            <p class="h6 fw-bolder mb-3">Lista produktów w  <span th:text="${selectedCategory.getDescription()}" class="text-primary">"Wszystkie kategorie"</span>:</p>
            <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
+
                     <th scope="col">Zdjęcie</th>
                     <th scope="col">Produkt</th>
                     <th scope="col">Cena</th>
@@ -52,7 +52,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="product: ${products}" >
-                    <th th:text="${product.id}" scope="row">1</th>
+
                     <td>
                         <img th:src="@{${product.imageUrl}}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 50px"/>
                     </td>
@@ -60,20 +60,19 @@
                     <td th:text="${product.price}">@mdo</td>
                 </tr>
                 <tr th:remove="all" >
-                    <th scope="row">2</th>
+
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
                 </tr>
                 <tr th:remove="all" >
-                    <th scope="row">3</th>
                     <td colspan="2">Larry the Bird</td>
                     <td>@twitter</td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="3">Suma:</td>
+                    <td colspan="2">Suma:</td>
                     <td th:text="${productsTotalSum}">$180</td>
                 </tr>
                 </tfoot>

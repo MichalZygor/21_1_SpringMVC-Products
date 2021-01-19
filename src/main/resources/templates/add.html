@@ -30,7 +30,7 @@
     <div class="row pt-3">
         <div class="col-md" id="main">
             <p class="h6 fw-bolder mb-3">Dodaj nową pozycję:</p>
-            <form th:object="${newProduct}" th:action="@{/add}" class="needs-validation" novalidate method="post" >
+            <form th:object="${product}" th:action="@{/add}" class="needs-validation" novalidate method="post" >
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
                         <label for="validationCustom01">Nazwa produktu: </label>
@@ -58,7 +58,7 @@
                         <label for="validationCustom03">Wybierz kategorię: </label>
                         <select th:name="category" class="form-control" id="validationCustom03" required>
                             <option th:selected="true" disabled="disabled" value="" >---</option>
-                            <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.name}">1</option>
+                            <option th:each="productCategory: ${categories}" th:text="${productCategory.description}" th:value="${productCategory}">1</option>
                             <option th:remove="all" >2</option>
                             <option th:remove="all" >3</option>
                             <option th:remove="all" >4</option>
@@ -93,7 +93,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
                     <th scope="col">Zdjęcie</th>
                     <th scope="col">Produkt</th>
                     <th scope="col">Cena</th>
@@ -102,7 +101,6 @@
                 </thead>
                 <tbody>
                 <tr th:each="product: ${products}">
-                    <th th:text="${product.id}" scope="row">1</th>
                     <td>
                         <img th:src="@{${product.imageUrl}}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 50px"/>
                     </td>
@@ -111,14 +109,12 @@
                     <td th:text="${product.category}" >kat1 </td>
                 </tr>
                 <tr th:remove="all">
-                    <th scope="row">2</th>
                     <td>Jacob</td>
                     <td>Thornton</td>
                     <td>@fat</td>
                     <td>kat21</td>
                 </tr>
                 <tr th:remove="all">
-                    <th scope="row">3</th>
                     <td>Larry the Bird</td>
                     <td>Thornton</td>
                     <td>@fat</td>
