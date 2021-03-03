@@ -49,4 +49,11 @@ public class ProductController {
         productRepository.add(product);
         return "redirect:/list?productCategory=" + ProductCategory.ALL_PRODUCTS;
     }
+
+    @GetMapping("/secure")
+    public String secure(){
+
+        //return "secure";
+        return "redirect:/";
+    }
 }
