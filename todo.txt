@@ -7,13 +7,13 @@ Aplikacja powinna posiadać następujące funkcjonalności:
 1. Formularz rejestracji (1 punkt) //done
 Na stronie głównej powinien istnieć link do formularza który umożliwia rejestrację nowego użytkownika.
 Użytkownik podaje nazwę użytkownika i hasło. Po rejestracji powinien zostać przekierowany do formularza
-logowania. Przy formularzu powinna być wyświetlona informacja o tym, że konto zostało utworzone. //todo
+logowania. Przy formularzu powinna być wyświetlona informacja o tym, że konto zostało utworzone. //done
 
 2. Formularz logowania (1 punkt) //done
 Na stronie głównej powinien również istnieć link kierujący do formularza logowania. Formularz powinien
 być spersonalizowany korzystając np z biblioteki Bootstrap.
 
-3. Ustawienia profilu i zmiana hasła (2 punkty) //todo
+3. Ustawienia profilu i zmiana hasła (2 punkty) //done
 Zalogowany użytkownik powinien mieć możliwość zmiany swojego imienia i nazwiska oraz hasła.
 
 4. Administracja (2 punkty) //todo
@@ -23,3 +23,17 @@ istnieć możliwość dymisji administratorów poprzez odbieranie im tej roli.
 
 5. Dodatkowe wymagania //done
 Hasło musi być szyfrowane.
+
+--- notatki
+
+<h2>Welcome</h2>
+<p>Spring Security Thymeleaf tutorial</p>
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div sec:authorize="isAuthenticated()">
+    Text visible only to authenticated users.
+</div>
+Authenticated username:
+<div sec:authentication="name"></div>
+Authenticated user roles:
+<div sec:authentication="principal.authorities"></div>

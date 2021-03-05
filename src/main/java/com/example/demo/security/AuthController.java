@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
@@ -16,22 +17,25 @@ public class AuthController {
     }
 
     @GetMapping("/logowanie")
-    public String loginForm(){
+    public String loginForm(Model model, @RequestParam(required = false, defaultValue = "") String registerStatus) {
+        model.addAttribute("registerStatus", registerStatus);
         return "security/login";
     }
 
     @GetMapping("/rejestracja")
-    public String registeerForm(Model model){
+    public String registeerForm(Model model) {
         model.addAttribute("user", new User());
         return "security/registerForm";
     }
 
     @PostMapping("/rejestracja")
-    public String addUser(User user){
-        if (!userService.registerUser(user)){
-            return "redirect:/rejestracja?error";
-        };
-
-        return "redirect:/logowanie";
+    public String addUser(User user, Model model) {
+        if (!userService.registerUser(user)) {
+            model.addAttribute("user", user);
+            model.addAttribute("registerStatus", "userExist");
+            return "security/registerForm";
+        } else {
+            return "redirect:/logowanie?registerStatus=registered";
+        }
     }
 }

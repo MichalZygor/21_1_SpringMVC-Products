@@ -1,12 +1,12 @@
 package com.example.demo.user;
 
-import org.hibernate.TransactionException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -30,6 +30,28 @@ public class UserService {
 
         try {
             userRepository.save(userToAdd);
+            return true;
+        } catch (Exception e){
+//            System.out.println("bład");
+//            throw (e);
+            return false;
+        }
+    }
+
+    public Optional<User> userProfile(String name) {
+        Optional<User> userProfile = userRepository.findByLogin(name);
+        return userProfile;
+    }
+
+    public boolean updateUser(User user) {
+        User userToUpdate = userRepository.findById(user.getId()).get();
+        userToUpdate.setLogin(user.getLogin());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        userToUpdate.setPassword(encryptedPassword);
+        try {
+            userRepository.save(userToUpdate);
             return true;
         } catch (Exception e){
 //            System.out.println("bład");

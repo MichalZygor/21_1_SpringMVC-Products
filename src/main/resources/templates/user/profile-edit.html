@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Logowanie</title>
+    <title>Edycja profilu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".toast").toast();
-        });
-    </script>
     <style>
         .text-color-mz1 {
             color: darkgreen;
@@ -36,27 +28,38 @@
     <div class="d-grid d-md-flex justify-content-md-end">
         <a th:href="@{|/|}" class="btn btn-warning m-1" href="/" role="button">Strona główna</a>
     </div>
-
-    <div th:if="${registerStatus == 'registered'}" class="toast fade show align-items-center text-white bg-primary border-0 m-3 mx-auto" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Cześć! Zostałeś poprawnie zarejestrowany. Teraz możesz się zalogować.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-
-
     <div class="row pt-3">
         <div class="col-md" id="main">
-            <p class="h6 fw-bolder mb-3">Logowanie:</p>
-            <form class="needs-validation" novalidate method="post" th:action="@{/logowanie}">
+            <p class="h6 fw-bolder mb-3">Edycja:</p>
+            <form class="needs-validation" novalidate method="post" th:action="@{/profil-aktualizacja}" th:object="${user}">
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
-                        <label for="login">Login użytkownika: </label>
+                        <label for="login">Login: </label>
                         <input type="text" class="form-control" id="login" placeholder="Login" required
-                               minlength="3" name="username">
+                               minlength="3" th:field="*{login}">
+                        <p th:text="${registerStatus == 'userExist' ? 'Login jest już w użyciu!' : '' }" class="text-danger fw-bolder"></p>
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="firstName">Imię: </label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First name" required
+                               minlength="3" th:field="*{firstName}">
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="lastName">Nazwisko: </label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Last name" required
+                               minlength="3" th:field="*{lastName}">
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>
@@ -67,16 +70,17 @@
                     <div class="col-md-5 mb-3">
                         <label for="password">Hasło: </label>
                         <input type="password" class="form-control" id="password" placeholder="Password" required
-                               minlength="3" name="password">
+                               minlength="3" name="password" th:field="*{password}">
+                        <p th:errors="*{password}">Błędne hasło!</p>
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>
                     </div>
                     <div class="col-md-7 mb-3"></div>
                 </div>
-
+                <input type="hidden" th:field="*{id}" />
                 <button class="btn btn-secondary" type="reset">Wyczyść formularz!</button>
-                <button class="btn btn-primary" type="submit">Logowanie!</button>
+                <button class="btn btn-primary" type="submit">Aktualizacja danych!</button>
 
             </form>
 

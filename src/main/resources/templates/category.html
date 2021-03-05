@@ -17,29 +17,19 @@
     </style>
 </head>
 <body class="bg-light">
+<div th:replace="fragments/header :: header">...</div>
 
 <div class="container-fluid bg-white shadow-sm mt-5 mb-2 text-color-mz1 fs-4 text-center fw-bolder pt-3 pb-3">
     <img th:src="@{src/logo.gif}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 100px"/>
     Magazyn z "Produktami"
 </div>
 
-<h2>Welcome</h2>
-<p>Spring Security Thymeleaf tutorial</p>
-<div sec:authorize="hasRole('USER')">Text visible to user.</div>
-<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-<div sec:authorize="isAuthenticated()">
-    Text visible only to authenticated users.
-</div>
-Authenticated username:
-<div sec:authentication="name"></div>
-Authenticated user roles:
-<div sec:authentication="principal.authorities"></div>
 
 <div class="container">
     <div class="d-grid d-md-flex justify-content-md-end">
-        <a th:href="@{|/add|}" class="btn btn-success m-1" href="/add" role="button">Dodaj nowy produkt</a>
+        <a th:href="@{|/add|}" sec:authorize="hasRole('USER')" class="btn btn-success m-1" href="/add" role="button" >Dodaj nowy produkt</a>
         <a th:href="@{|/|}" class="btn btn-warning m-1" href="/" role="button">Strona główna</a>
-        <a th:href="@{|/logout|}" class="btn btn-warning m-1" href="/" role="button">Wylogowanie</a>
+
     </div>
     <div class="row pt-3">
         <div class="col-md-3">

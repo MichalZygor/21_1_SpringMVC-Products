@@ -17,6 +17,7 @@
     </style>
 </head>
 <body class="bg-light">
+<div th:replace="fragments/header :: header">...</div>
 
 <div class="container-fluid bg-white shadow-sm mt-5 mb-2 text-color-mz1 fs-4 text-center fw-bolder pt-3 pb-3">
     <img th:src="@{src/logo.gif}" src="../static/src/logo.gif" class="mx-auto d-block" style="height: 100px"/>
@@ -36,7 +37,7 @@
                         <label for="login">Login: </label>
                         <input type="text" class="form-control" id="login" placeholder="Login" required
                                minlength="3" th:field="*{login}">
-                        <p th:errors="*{login}">Błędny login lub jest już w użyciu!</p>
+                        <p th:text="${registerStatus == 'userExist' ? 'Login jest już w użyciu!' : '' }" class="text-danger fw-bolder"></p>
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>
@@ -79,7 +80,7 @@
                 </div>
 
                 <button class="btn btn-secondary" type="reset">Wyczyść formularz!</button>
-                <button class="btn btn-primary" type="submit">Logowanie!</button>
+                <button class="btn btn-primary" type="submit">Rejestracja!</button>
 
             </form>
 
