@@ -17,12 +17,11 @@ public class UserController {
     }
 
     @GetMapping("/profil-edycja")
-    public String profileEdit(Model model, Principal principal) {
-        model.addAttribute("user", userService.userProfile(principal.getName()));
+    public String profileEdit(Model model, Principal principal,
+                              @RequestParam(required = false, defaultValue = "") String login) {
+        model.addAttribute("user", userService.userProfile(login.isEmpty() ? principal.getName() : login));
         return "/user/profile-edit";
     }
-
-
 
     @PostMapping("/profil-aktualizacja")
     public String updateUser(User user, Model model) {
@@ -31,7 +30,7 @@ public class UserController {
             model.addAttribute("registerStatus", "userExist");
             return "user/profile-edit";
         } else {
-            return "redirect:/";
+            return "redirect:/administracja";
         }
     }
 }

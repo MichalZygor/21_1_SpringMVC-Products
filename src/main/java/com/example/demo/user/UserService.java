@@ -30,7 +30,6 @@ public class UserService {
         userToAdd.setPassword(encryptedPassword);
         List<UserRole> list = Collections.singletonList(new UserRole(userToAdd, Role.ROLE_USER));
         userToAdd.setRoles(new HashSet<>(list));
-
         try {
             userRepository.save(userToAdd);
             return true;
@@ -67,12 +66,26 @@ public class UserService {
         Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
 
         return userRepository.findAll()
-            .stream()
-            .filter(user -> !user.getLogin().equals(loggedUser.getName()))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(user -> !user.getLogin().equals(loggedUser.getName()))
+                .collect(Collectors.toList());
     }
 
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public void addRoleAdmin(String login) {
+        User userToUpdate = userRepository.findByLogin(login).get();
+        List<UserRole> list = Collections.singletonList(new UserRole(userToUpdate, Role.ROLE_ADMIN));
+        userToUpdate.setRoles(new HashSet<>(list));
+        userRepository.save(userToUpdate);
+    }
+
+    public void removeRoleAdmin(String login) {
+        User userToUpdate = userRepository.findByLogin(login).get();
+        List<UserRole> list = Collections.singletonList(new UserRole(userToUpdate, Role.ROLE_USER));
+        userToUpdate.setRoles(new HashSet<>(list));
+        userRepository.save(userToUpdate);
     }
 }

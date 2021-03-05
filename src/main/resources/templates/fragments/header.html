@@ -27,7 +27,8 @@
 <div class="container d-grid d-md-flex justify-content-md-end">
     <a th:href="@{|/secure|}"  sec:authorize="!isAuthenticated()" class="btn btn-primary m-1 btn-sm" href="/secure" role="button">Logowanie</a>
     <a th:href="@{|/logout|}" sec:authorize="isAuthenticated()" class="btn btn-primary m-1 btn-sm" href="/" role="button">Wylogowanie</a>
-    <a th:href="@{|/rejestracja|}" class="btn btn-primary m-1 btn-sm btn-sm" href="/secure" role="button">Rejestracja</a>
+    <a th:href="@{|/rejestracja|}" sec:authorize="!isAuthenticated()" class="btn btn-primary m-1 btn-sm btn-sm" href="/secure" role="button">Rejestracja</a>
+    <a th:href="@{|/rejestracja|}" sec:authorize="hasRole('ADMIN')" class="btn btn-primary m-1 btn-sm btn-sm" href="/secure" role="button">Rejestracja</a>
 </div>
 </div>
 </body>

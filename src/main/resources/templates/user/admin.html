@@ -31,58 +31,26 @@
     <div class="row pt-3">
         <div class="col-md" id="main">
             <p class="h6 fw-bolder mb-3">Administracja zasobami:</p>
-            <form class="needs-validation" novalidate method="post" th:action="@{/profil-aktualizacja}" th:object="${user}">
-                <div class="form-row">
-                    <div class="col-md-5 mb-3">
-                        <label for="login">Login: </label>
-                        <input type="text" class="form-control" id="login" placeholder="Login" required
-                               minlength="3" th:field="*{login}">
-                        <p th:text="${registerStatus == 'userExist' ? 'Login jest już w użyciu!' : '' }" class="text-danger fw-bolder"></p>
-                        <div class="invalid-feedback">
-                            Proszę wpisać dane!
-                        </div>
-                    </div>
-                    <div class="col-md-7 mb-3"></div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-5 mb-3">
-                        <label for="firstName">Imię: </label>
-                        <input type="text" class="form-control" id="firstName" placeholder="First name" required
-                               minlength="3" th:field="*{firstName}">
-                        <div class="invalid-feedback">
-                            Proszę wpisać dane!
-                        </div>
-                    </div>
-                    <div class="col-md-7 mb-3"></div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-5 mb-3">
-                        <label for="lastName">Nazwisko: </label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Last name" required
-                               minlength="3" th:field="*{lastName}">
-                        <div class="invalid-feedback">
-                            Proszę wpisać dane!
-                        </div>
-                    </div>
-                    <div class="col-md-7 mb-3"></div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-5 mb-3">
-                        <label for="password">Hasło: </label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" required
-                               minlength="3" name="password" th:field="*{password}">
-                        <p th:errors="*{password}">Błędne hasło!</p>
-                        <div class="invalid-feedback">
-                            Proszę wpisać dane!
-                        </div>
-                    </div>
-                    <div class="col-md-7 mb-3"></div>
-                </div>
-                <input type="hidden" th:field="*{id}" />
-                <button class="btn btn-secondary" type="reset">Wyczyść formularz!</button>
-                <button class="btn btn-primary" type="submit">Aktualizacja danych!</button>
 
-            </form>
+            <ul>
+                <li th:each="user : ${userList}">
+                    <span th:text="|${user.login}|" class="fw-bolder"></span>
+                    <a th:href="|/profil-usuniecie?id=${user.id}|"
+                       class="btn btn-outline-danger btn-sm m-1 p-0">&nbsp;Usuń&nbsp;</a>
+                    <a th:href="|/profil-edycja?login=${user.login}|"
+                       class="btn btn-outline-primary btn-sm m-1 p-0">&nbsp;Edycja&nbsp;</a>
+                    <a th:href="|/usun-role?login=${user.login}|" th:if="${user.roles.size() > 1}"
+                       class="btn btn-outline-info btn-sm m-1 p-0">&nbsp;Wypisz z roli "ADMIN"&nbsp;</a>
+                    <a th:href="|/dodaj-role?login=${user.login}|" th:if="${user.roles.size() == 1}"
+                       class="btn btn-outline-info btn-sm m-1 p-0">&nbsp;Dopisz do roli "ADMIN"&nbsp;</a>
+
+
+
+
+
+
+                </li>
+            </ul>
 
             <div class="container-fluid bg-color-mz1 text-secondary shadow-sm mt-5 mb-2 fs-6 text-center pt-3 pb-3">
                 Designed by Michał Zygor, 2021.01
