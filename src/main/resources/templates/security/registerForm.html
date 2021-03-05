@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Logowanie</title>
+    <title>Rejestracja</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style>
@@ -29,13 +29,36 @@
     </div>
     <div class="row pt-3">
         <div class="col-md" id="main">
-            <p class="h6 fw-bolder mb-3">Logowanie:</p>
-            <form class="needs-validation" novalidate method="post" th:action="@{/logowanie}">
+            <p class="h6 fw-bolder mb-3">Rejestracja:</p>
+            <form class="needs-validation" novalidate method="post" th:action="@{/rejestracja}" th:object="${user}">
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
-                        <label for="login">Login użytkownika: </label>
+                        <label for="login">Login: </label>
                         <input type="text" class="form-control" id="login" placeholder="Login" required
-                               minlength="3" name="username">
+                               minlength="3" th:field="*{login}">
+                        <p th:errors="*{login}">Błędny login lub jest już w użyciu!</p>
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="firstName">Imię: </label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First name" required
+                               minlength="3" th:field="*{firstName}">
+                        <div class="invalid-feedback">
+                            Proszę wpisać dane!
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3"></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label for="lastName">Nazwisko: </label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Last name" required
+                               minlength="3" th:field="*{lastName}">
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>
@@ -47,6 +70,7 @@
                         <label for="password">Hasło: </label>
                         <input type="password" class="form-control" id="password" placeholder="Password" required
                                minlength="3" name="password">
+                        <p th:errors="*{password}">Błędne hasło!</p>
                         <div class="invalid-feedback">
                             Proszę wpisać dane!
                         </div>

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.product;
 
 public class Product {
     private String name;

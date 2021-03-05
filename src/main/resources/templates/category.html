@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,10 +23,23 @@
     Magazyn z "Produktami"
 </div>
 
+<h2>Welcome</h2>
+<p>Spring Security Thymeleaf tutorial</p>
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div sec:authorize="isAuthenticated()">
+    Text visible only to authenticated users.
+</div>
+Authenticated username:
+<div sec:authentication="name"></div>
+Authenticated user roles:
+<div sec:authentication="principal.authorities"></div>
+
 <div class="container">
     <div class="d-grid d-md-flex justify-content-md-end">
         <a th:href="@{|/add|}" class="btn btn-success m-1" href="/add" role="button">Dodaj nowy produkt</a>
         <a th:href="@{|/|}" class="btn btn-warning m-1" href="/" role="button">Strona główna</a>
+        <a th:href="@{|/logout|}" class="btn btn-warning m-1" href="/" role="button">Wylogowanie</a>
     </div>
     <div class="row pt-3">
         <div class="col-md-3">
