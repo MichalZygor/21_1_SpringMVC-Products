@@ -22,7 +22,7 @@
 <div sec:authorize="isAuthenticated()" class="container d-grid d-md-flex justify-content-md-end">
     <span class="font-monospace fs-5 pt-2">Witaj <span sec:authentication="name" class="text-uppercase"></span>!</span>
     <a th:href="@{|/profil-edycja|}" class="btn btn-outline-danger m-1 btn-sm" href="/secure" role="button">Twój profil</a>
-    <a th:href="@{|/secure|}" sec:authorize="hasRole('ADMIN')" class="btn btn-outline-danger m-1 btn-sm" href="/secure" role="button">Zarządzanie</a>
+    <a th:href="@{|/administracja|}" sec:authorize="hasRole('ADMIN')" class="btn btn-outline-danger m-1 btn-sm" href="/administracja" role="button">Zarządzanie</a>
 </div>
 <div class="container d-grid d-md-flex justify-content-md-end">
     <a th:href="@{|/secure|}"  sec:authorize="!isAuthenticated()" class="btn btn-primary m-1 btn-sm" href="/secure" role="button">Logowanie</a>

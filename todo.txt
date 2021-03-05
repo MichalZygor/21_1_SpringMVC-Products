@@ -14,7 +14,7 @@ Na stronie głównej powinien również istnieć link kierujący do formularza l
 być spersonalizowany korzystając np z biblioteki Bootstrap.
 
 3. Ustawienia profilu i zmiana hasła (2 punkty) //done
-Zalogowany użytkownik powinien mieć możliwość zmiany swojego imienia i nazwiska oraz hasła.
+Zalogowany użytkownik powinien mieć możliwość zmiany swojego imienia i nazwiska oraz hasła. //todo podział na osobne częsci do zmiany
 
 4. Administracja (2 punkty) //todo
 Użytkownicy posiadający rolę ADMIN powinni mieć możliwość przeglądania listy użytkowników oraz nadawania
@@ -37,3 +37,7 @@ Authenticated username:
 <div sec:authentication="name"></div>
 Authenticated user roles:
 <div sec:authentication="principal.authorities"></div>
+
+KOMENTARZE I PYTANIA:
+- jak updatetować użytkownika bez miany hasła?
+- jak dodać do zmiennych "strony" imię użytkownika

@@ -1,5 +1,7 @@
 package com.example.demo.user;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -31,7 +34,7 @@ public class UserService {
         try {
             userRepository.save(userToAdd);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
 //            System.out.println("bład");
 //            throw (e);
             return false;
@@ -53,10 +56,23 @@ public class UserService {
         try {
             userRepository.save(userToUpdate);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
 //            System.out.println("bład");
 //            throw (e);
             return false;
         }
+    }
+
+    public List<User> findAllWithoutLoggedUser() {
+        Authentication loggedUser = SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepository.findAll()
+            .stream()
+            .filter(user -> !user.getLogin().equals(loggedUser.getName()))
+            .collect(Collectors.toList());
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 }
